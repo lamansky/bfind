@@ -1,0 +1,40 @@
+{
+  "name": "bfind",
+  "version": "1.0.0",
+  "description": "Runs a binary search on any sorted collection.",
+  "keywords": [
+    "find",
+    "search",
+    "sorted",
+    "collection",
+    "binary search"
+  ],
+  "author": {
+    "name": "Fr. John Lamansky",
+    "url": "lamansky.com"
+  },
+  "license": "MIT",
+  "repository": "lamansky/bfind",
+  "main": "index.js",
+  "files": [],
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "dependencies": {
+    "3fn": "^1.0.0",
+    "arrify": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-lamansky": "^1.0.0",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "eslintConfig": {
+    "extends": "lamansky",
+    "env": {
+      "mocha": true
+    }
+  }
+}
