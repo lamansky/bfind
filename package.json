@@ -1,6 +1,6 @@
 {
   "name": "bfind",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Runs a binary search on any sorted collection.",
   "keywords": [
     "find",
