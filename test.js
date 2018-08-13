@@ -27,7 +27,7 @@ describe('bfind()', function () {
     })
     assert.strictEqual(found, true)
     assert.strictEqual(index, 7)
-    assert.strictEqual(calls, 2)
+    assert.strictEqual(calls, 4)
   })
 
   it('should locate a value at the beginning', function () {
@@ -40,7 +40,7 @@ describe('bfind()', function () {
     })
     assert.strictEqual(found, true)
     assert.strictEqual(index, 0)
-    assert.strictEqual(calls, 4)
+    assert.strictEqual(calls, 6)
   })
 
   it('should locate a value at the end', function () {
@@ -53,17 +53,51 @@ describe('bfind()', function () {
     })
     assert.strictEqual(found, true)
     assert.strictEqual(index, 9)
-    assert.strictEqual(calls, 4)
+    assert.strictEqual(calls, 6)
   })
 
-  it('should return false `found` if value out of range', function () {
+  it('should provide insertion index for value sorted before beginning', function () {
+    const {found, index} = bfind({
+      get: i => i,
+      length: 10,
+      value: -1,
+    })
+    assert.strictEqual(found, false)
+    assert.strictEqual(index, 0)
+  })
+
+  it('should short-circuit for value sorted before beginning', function () {
+    let calls = 0
+    const {found} = bfind({
+      compare: (a, b) => { calls++; return a - b },
+      get: i => i,
+      length: 10,
+      value: -1,
+    })
+    assert.strictEqual(found, false)
+    assert.strictEqual(calls, 2)
+  })
+
+  it('should provide insertion index for value sorted after end', function () {
     const {found, index} = bfind({
       get: i => i,
       length: 10,
       value: 10,
     })
     assert.strictEqual(found, false)
-    assert.strictEqual(index, 9)
+    assert.strictEqual(index, 10)
+  })
+
+  it('should short-circuit for value sorted after end', function () {
+    let calls = 0
+    const {found} = bfind({
+      compare: (a, b) => { calls++; return a - b },
+      get: i => i,
+      length: 10,
+      value: 10,
+    })
+    assert.strictEqual(found, false)
+    assert.strictEqual(calls, 1)
   })
 
   it('should index a new item at the correct location', function () {

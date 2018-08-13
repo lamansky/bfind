@@ -6,6 +6,10 @@ const threeWayFn = require('3fn')
 module.exports = function bfind ({compare, get, length, multiple, value}) {
   compare = threeWayFn(...arrify(compare))
 
+  if (length === 0) return {found: false, index: 0}
+  if (compare(value, get(length - 1)) === 1) return {found: false, index: length}
+  if (compare(value, get(0)) === -1) return {found: false, index: 0}
+
   function search (min, max, target) {
     let c, index, match
     if (max >= min) {
