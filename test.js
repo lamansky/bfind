@@ -110,6 +110,35 @@ describe('bfind()', function () {
     assert.strictEqual(index, 2)
   })
 
+  it('should only return an identical match if `multiple` set to `identical`', function () {
+    const obj = {}
+    const arr = [obj, {}, {a: 1}]
+    {
+      const {found, identical, index} = bfind({
+        compare: (a, b) => Object.keys(a).length - Object.keys(b).length,
+        get: i => arr[i],
+        length: arr.length,
+        multiple: 'identical',
+        value: obj,
+      })
+      assert.strictEqual(found, true)
+      assert.strictEqual(identical, true)
+      assert.strictEqual(index, 0)
+    }
+    {
+      const {found, identical, index} = bfind({
+        compare: (a, b) => Object.keys(a).length - Object.keys(b).length,
+        get: i => arr[i],
+        length: arr.length,
+        multiple: 'identical',
+        value: {},
+      })
+      assert.strictEqual(found, true)
+      assert.strictEqual(identical, false)
+      assert.strictEqual(index, 1)
+    }
+  })
+
   it('should return the first matching index if `multiple` set to `first`', function () {
     {
       const arr = ['a', 'b', 'b', 'b', 'c']

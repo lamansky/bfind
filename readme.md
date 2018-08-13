@@ -24,7 +24,10 @@ The module exports a single function.
         * If omitted: Only numbers and strings will be compared as-is. All others values will be coerced into strings before being compared.
     * `get` (function): A callback that should return a value from the collection for a given index from `0` to `length - 1`.
     * `length` (positive integer): The length of the collection.
-    * Optional: `multiple` (string): Specifies behavior in the event that more than one existing collection item is sort-equivalent with `value`. If set to `first` or `last`, the index of the first or last sort-equivalent item (respectively) will be returned. Otherwise, the index of whatever sort-equivalent item the algorithm comes across first will be returned.
+    * Optional: `multiple` (string): Specifies behavior in the event that more than one existing collection item is sort-equivalent with `value`.
+        * If set to `first` or `last`, the index of the first or last sort-equivalent item (respectively) will be returned.
+        * If set to `identical`, every sort-equivalent item will be scanned for identity (`===`) with `value` and the first identical item found will have its index returned.
+        * Otherwise, the index of whatever sort-equivalent item the algorithm comes across first will be returned.
     * `value` (any): The value to search for.
 
 ### Return Value
